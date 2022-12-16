@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SeismicSignalWeb</title>
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <header>
+        <section class="textos-header">
+            <h1>Sistema de monitorización de vibraciones</h1>
+        </section>
+        <div class="wave" style="height: 150px; overflow: hidden;"><svg viewBox="0 0 500 150" preserveAspectRatio="none"
+                style="height: 100%; width: 100%;">
+                <path d="M0.00,49.98 C150.00,150.00 349.20,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                    style="stroke: none; fill: #fff;"></path>
+            </svg></div>
+    </header>
+    <main>
+        <section class="contenedor sobre-nosotros">
+            <h2 class="titulo">Descripción del Proyecto</h2>
+            <div class="contenedor-sobre-nosotros">
+                <img src="img/ArquitecturaRed.svg" alt="" class="imagen-about-us">
+                <div class="contenido-textos">
+                    <h3><span>1</span>Hardware</h3>
+                    <p>Prototipo de sistema de monitorización de salud estructural (SHM) compuesto por 3 nodos sensores que cuentan con un acelerometro triaxial MPU6050 con tecnología MEMS capacitiva, un microcontrolador NodeMCU v3 ESP8266 desarrollado con WiFi y un circuito de alimentación y recarga para una batería recargable 18650 de 6800mAh. El nodo sensor transmite los datos recopilados mediante protocolo MQTT. </p>
+                    <h3><span>2</span>Software</h3>
+                    <p>Se dispone de un software para el monitoreo en tiempo real de la aceleración transmitida por el nodo sensor y el procesamiento de los datos recopilados.</p>
+                </div>
+            </div>
+        </section>
+        <section class="portafolio">
+            <div class="contenedor">
+              <h2 class="titulo-form">Alarmas</h2>
+              <p>Se ha colocado por defecto los limites de referencia de aceleración de 2 [m/s2] para cada sensor. Si desea cambiarlos ingrese nuevos valores en el panel inferior. De estos valores dependera la activación de la alarma.</p>
+              <div class="cards">
+                <div class="card">
+                  <div class="form-register">
+                      <h5>Sensor 1</h5>
+                      <input class="controls" type="number" name="OffS1x" id= "OffS1x" placeholder="Offset Eje X">
+                      <input class="controls" type="number" name="OffS1y" id= "OffS1y" placeholder="Offset Eje Y">
+                      <input class="controls" type="number" name="OffS1z" id= "OffS1z" placeholder="Offset Eje Z">
+                      <h5>Sensor 2</h5>
+                      <input class="controls" type="number" name="OffS2x" id= "OffS2x" placeholder="Offset Eje X">
+                      <input class="controls" type="number" name="OffS2y" id= "OffS2y" placeholder="Offset Eje Y">
+                      <input class="controls" type="number" name="OffS2z" id= "OffS2z" placeholder="Offset Eje Z">
+                      <h5>Sensor 3</h5>
+                      <input class="controls" type="number" name="OffS3x" id= "OffS3x" placeholder="Offset Eje X">
+                      <input class="controls" type="number" name="OffS3y" id= "OffS3y" placeholder="Offset Eje Y">
+                      <input class="controls" type="number" name="OffS3z" id= "OffS3z" placeholder="Offset Eje Z">
+                      <p><p>
+                      <button class="botons" id="button" onclick="actualizar()"> Aplicar </button>
+                      <p><p>
+                  </div>
+                </div>
+                  <div class="card">
+                    <div class="form-register-dat">
+                      <h5>Valores Offset Ingresados</h5>
+                      <h6>Sensor 1</h6>
+                      <div id="LS1x">
+                        Eje X: 2 [m/s2]
+                      </div>
+                      <div id="LS1y">
+                        Eje Y: 2 [m/s2]
+                      </div>
+                      <div id="LS1z">
+                        Eje Z: 2 [m/s2]
+                      </div>
+                      <h6>Sensor 2</h6>
+                      <div id="LS2x">
+                        Eje X: 2 [m/s2]
+                      </div>
+                      <div id="LS2y">
+                        Eje Y: 2 [m/s2]
+                      </div>
+                      <div id="LS2z">
+                        Eje Z: 2 [m/s2]
+                      </div>
+                      <h6>Sensor 3</h6>
+                      <div id="LS3x">
+                        Eje X: 2 [m/s2]
+                      </div>
+                      <div id="LS3y">
+                        Eje Y: 2 [m/s2]
+                      </div>
+                      <div id="LS3z">
+                        Eje Z: 2 [m/s2]
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        </section>
+        <section class="about-services">
+            <div class="contenedor">
+                <h2 class="titulo">Sensor 1</h2>
+                <div id="BatS1">
+                Batería: 100 %
+                </div>
+                <section class="slider">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="card" >
+                        <div class="card-body" >
+                          <div class="chart-container" >
+                            <h5 class="card-title">Eje X</h5>
+                            <canvas id="S1x" style="display: block; height: 250px; width: 970px;"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="card" >
+                        <div class="card-body" >
+                          <div class="chart-container" >
+                            <h5 class="card-title">Eje Y</h5>
+                            <canvas id="S1y" style="display: block; height: 250px; width: 970px;"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="card" >
+                        <div class="card-body" >
+                          <div class="chart-container" >
+                            <h5 class="card-title">Eje Z</h5>
+                            <canvas id="S1z" style="display: block; height: 250px; width: 970px;"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </section>
+            </div>
+        </section>
+        <section class="portafolio">
+          <div class="contenedor">
+          <h2 class="titulo">Sensor 2</h2>
+          <div id="BatS2">
+          Batería: 100 %
+          </div>
+            <section class="slider">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="card" >
+                    <div class="card-body" >
+                      <div class="chart-container" >
+                        <h5 class="card-title">Eje X</h5>
+                        <canvas id="S2x" style="display: block; height: 250px; width: 970px;"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="card" >
+                    <div class="card-body" >
+                      <div class="chart-container" >
+                        <h5 class="card-title">Eje Y</h5>
+                        <canvas id="S2y" style="display: block; height: 250px; width: 970px;"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="card" >
+                    <div class="card-body" >
+                      <div class="chart-container" >
+                        <h5 class="card-title">Eje Z</h5>
+                        <canvas id="S2z" style="display: block; height: 250px; width: 970px;"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+        <section class="about-services">
+            <div class="contenedor">
+                <h2 class="titulo">Sensor 3</h2>
+                <div id="BatS3">
+                Batería: 100 %
+                </div>
+                <section class="slider">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="card" >
+                        <div class="card-body" >
+                          <div class="chart-container" >
+                            <h5 class="card-title">Eje X</h5>
+                            <canvas id="S3x" style="display: block; height: 250px; width: 970px;"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="card" >
+                        <div class="card-body" >
+                          <div class="chart-container" >
+                            <h5 class="card-title">Eje Y</h5>
+                            <canvas id="S3y" style="display: block; height: 250px; width: 970px;"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="card" >
+                        <div class="card-body" >
+                          <div class="chart-container" >
+                            <h5 class="card-title">Eje Z</h5>
+                            <canvas id="S3z" style="display: block; height: 250px; width: 970px;"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="contenedor-footer">
+            <div class="content-foo">
+                <h4>Phone</h4>
+                <p>(+593) 983771882</p>
+                <p>(+593) 984948157</p>
+            </div>
+            <div class="content-foo">
+                <h4>Email</h4>
+                <p>bryanlandazuri1297@gmail.com</p>
+                <p>marco_barreno@hotmail.com</p>
+            </div>
+        </div>
+        <h2 class="titulo-final">&copy; Marco Barreno | Bryan Landázuri</h2>
+    </footer>
+
+    <script src="mqttws31.js"></script>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="iot-mqtt.js"></script>
+    <script src="graficas.js"></script>
+    <script src="Notifi.js"></script>
+</body>
+
+</html>
